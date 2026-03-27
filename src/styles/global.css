@@ -142,6 +142,16 @@ h1 {
   margin: 0.45rem 0;
 }
 
+.contact-cta {
+  margin: 1rem 0 0.5rem;
+}
+
+.contact-note {
+  margin: 0 0 0.9rem;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
 .copy-wrap {
   display: flex;
   align-items: center;

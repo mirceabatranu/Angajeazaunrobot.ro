@@ -90,6 +90,10 @@ const useCases = [
               <a href={`tel:${phone}`}>{phoneDisplay}</a>
           </li>
         </ul>
+          <div class="contact-cta">
+            <a class="button primary" href={`mailto:${primaryEmail}`}>Scrie-ne un email</a>
+          </div>
+          <p class="contact-note">Raspundem in aceeasi zi lucratoare.</p>
         <div class="copy-wrap">
             <button type="button" class="copy-btn" id="copy-email" data-email={primaryEmail}>Copiaza email principal</button>
           <span class="copy-status" id="copy-status" role="status" aria-live="polite"></span>
@@ -115,6 +119,7 @@ const useCases = [
         try {
           await navigator.clipboard.writeText(email);
           status.textContent = "Copiat!";
+          copyButton.textContent = "Copiat!";
           } catch {
             // Fallback pentru browsere mai restrictive.
           const tempInput = document.createElement("input");
@@ -124,10 +129,12 @@ const useCases = [
           document.execCommand("copy");
           document.body.removeChild(tempInput);
           status.textContent = "Copiat!";
+          copyButton.textContent = "Copiat!";
         }
 
         window.setTimeout(() => {
           status.textContent = "";
+          copyButton.textContent = "Copiaza email principal";
         }, 1800);
       });
     }

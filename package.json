@@ -6,8 +6,9 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "deploy": "npm run build && firebase deploy --only hosting",
-    "deploy:hosting": "firebase deploy --only hosting"
+    "start": "sh -c 'astro preview --host 0.0.0.0 --port ${PORT:-8080}'",
+    "deploy": "npm run build && npx firebase-tools deploy --only hosting --project angajeazaunrobot-gsde63",
+    "deploy:hosting": "npx firebase-tools deploy --only hosting --project angajeazaunrobot-gsde63"
   },
   "repository": {
     "type": "git",
