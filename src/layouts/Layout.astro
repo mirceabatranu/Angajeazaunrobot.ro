@@ -1,0 +1,80 @@
+---
+import "../styles/global.css";
+
+interface Props {
+  title?: string;
+  description?: string;
+  canonical?: string;
+}
+
+const {
+  title = "Angajeaza un Robot | Agentie de Inteligenta Artificiala",
+  description = "Agentie de inteligenta artificiala din Romania specializata in agenti AI care automatizeaza suportul clienti, vanzarile, operatiunile si procesele repetitive.",
+  canonical = "https://angajeazaunrobot.ro/"
+} = Astro.props;
+
+const organizationSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "Angajeaza un Robot",
+  url: "https://angajeazaunrobot.ro",
+  description,
+  email: "mirceaipopescu@gmail.com",
+  telephone: "+40744681989",
+  areaServed: {
+    "@type": "Country",
+    name: "Romania"
+  },
+  knowsAbout: [
+    "Agentic AI",
+    "Automatizare procese",
+    "Asistenti virtuali",
+    "AI pentru companii"
+  ],
+  contactPoint: [
+    {
+      "@type": "ContactPoint",
+      contactType: "sales",
+      areaServed: "RO",
+      availableLanguage: ["ro"],
+      email: "mirceaipopescu@gmail.com",
+      telephone: "+40744681989"
+    },
+    {
+      "@type": "ContactPoint",
+      contactType: "customer support",
+      areaServed: "RO",
+      availableLanguage: ["ro"],
+      email: "salut@angajeazaunrobot.ro",
+      telephone: "+40744681989"
+    }
+  ]
+};
+---
+
+<!doctype html>
+<html lang="ro">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+
+    <meta property="og:locale" content="ro_RO" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:site_name" content="Angajeaza un Robot" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+
+    <script type="application/ld+json" set:html={JSON.stringify(organizationSchema)} />
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>

@@ -1,0 +1,28 @@
+{
+  "name": "angajeazaunrobot.ro",
+  "version": "1.0.0",
+  "description": "Site de prezentare pentru Angajeaza un Robot",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "deploy": "npm run build && firebase deploy --only hosting",
+    "deploy:hosting": "firebase deploy --only hosting"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mirceabatranu/Angajeazaunrobot.ro.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/mirceabatranu/Angajeazaunrobot.ro/issues"
+  },
+  "homepage": "https://github.com/mirceabatranu/Angajeazaunrobot.ro#readme",
+  "dependencies": {
+    "@astrojs/sitemap": "^3.7.2",
+    "astro": "^6.1.1"
+  }
+}

@@ -1,0 +1,135 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+const title = "Angajeaza un Robot | Agentie de Inteligenta Artificiala";
+const description = "Construim agenti AI care reduc costuri, cresc viteza de executie si aduc claritate operationala pentru companiile din Romania.";
+const canonical = "https://angajeazaunrobot.ro/";
+const primaryEmail = "mirceaipopescu@gmail.com";
+const secondaryEmail = "salut@angajeazaunrobot.ro";
+const phone = "+40744681989";
+const phoneDisplay = "+40 744 681 989";
+
+const useCases = [
+  {
+    title: "Automatizare Suport Clienti",
+    problem: "Echipele raspund lent la volume mari de intrebari repetitive, iar satisfactia clientilor scade.",
+    solution: "Agenti AI omnichannel preiau tichete, raspund instant in romana si escaleaza doar cazurile critice."
+  },
+  {
+    title: "Precalificare Lead-uri in Vanzari",
+    problem: "Lead-urile se pierd intre formulare, emailuri si apeluri, iar echipa comerciala consuma timp pe prospecti nepotriviti.",
+    solution: "Agenti conversationali califica intentia, colecteaza datele relevante si trimit lead-uri curate direct in pipeline."
+  },
+  {
+    title: "Automatizare Operatiuni Interne",
+    problem: "Procesele manuale dintre departamente genereaza blocaje, erori si costuri ascunse.",
+    solution: "Fluxuri AI conectate la instrumentele interne executa task-uri repetitive cu trasabilitate completa."
+  },
+  {
+    title: "Asistent AI pentru Management",
+    problem: "Deciziile sunt intarziate din lipsa unei sinteze rapide a datelor operationale.",
+    solution: "Un asistent AI transforma date disparate in rapoarte concise, recomandari si alerte proactive."
+  }
+];
+---
+
+<Layout {title} {description} {canonical}>
+  <main>
+    <section class="hero" aria-labelledby="titlu-principal">
+      <div class="container">
+        <p class="eyebrow">Agentic AI pentru companii din Romania</p>
+        <h1 id="titlu-principal">Angajeaza un Robot si scaleaza fara sa maresti echipa</h1>
+        <p class="lead">
+          Construim sisteme AI orientate pe rezultate: agenti care vorbesc cu clientii,
+          automatizeaza procese operationale si lucreaza 24/7, cu cost predictibil si control uman.
+        </p>
+        <div class="hero-cta">
+          <a class="button primary" href="#contact">Discuta cu noi</a>
+          <a class="button secondary" href="#use-case-uri">Vezi use case-uri</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="use-case-uri" class="section" aria-labelledby="titlu-use-case">
+      <div class="container">
+        <h2 id="titlu-use-case">Use case-uri AI gata de implementat</h2>
+        <div class="grid">
+          {
+            useCases.map((item) => (
+              <article class="card">
+                <h3>{item.title}</h3>
+                <p><span class="k-label">Problema:</span> {item.problem}</p>
+                <p><span class="k-label">Solutie AI:</span> {item.solution}</p>
+                <p>
+                  <a href="#" rel="nofollow">Vezi schema tehnica (placeholder)</a>
+                </p>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="section" aria-labelledby="titlu-contact">
+      <div class="container contact">
+        <h2 id="titlu-contact">Contact direct</h2>
+        <p class="lead">
+          Fara formulare si fara frictiuni. Scrie-ne sau suna-ne direct pentru o discutie despre primul tau agent AI.
+        </p>
+        <ul class="contact-list">
+          <li>
+            Email principal:
+            <a href={`mailto:${primaryEmail}`}>{primaryEmail}</a>
+          </li>
+          <li>
+            Email business:
+            <a href={`mailto:${secondaryEmail}`}>{secondaryEmail}</a>
+          </li>
+          <li>
+            Telefon:
+              <a href={`tel:${phone}`}>{phoneDisplay}</a>
+          </li>
+        </ul>
+        <div class="copy-wrap">
+            <button type="button" class="copy-btn" id="copy-email" data-email={primaryEmail}>Copiaza email principal</button>
+          <span class="copy-status" id="copy-status" role="status" aria-live="polite"></span>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <small>Angajeaza un Robot - Agentie AI in Romania</small>
+    </div>
+  </footer>
+
+  <script is:inline>
+    const copyButton = document.querySelector("#copy-email");
+    const status = document.querySelector("#copy-status");
+
+    if (copyButton && status) {
+      copyButton.addEventListener("click", async () => {
+        const email = copyButton.getAttribute("data-email") || "";
+
+        try {
+          await navigator.clipboard.writeText(email);
+          status.textContent = "Copiat!";
+          } catch {
+            // Fallback pentru browsere mai restrictive.
+          const tempInput = document.createElement("input");
+          tempInput.value = email;
+          document.body.appendChild(tempInput);
+          tempInput.select();
+          document.execCommand("copy");
+          document.body.removeChild(tempInput);
+          status.textContent = "Copiat!";
+        }
+
+        window.setTimeout(() => {
+          status.textContent = "";
+        }, 1800);
+      });
+    }
+  </script>
+</Layout>
