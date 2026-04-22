@@ -16,6 +16,14 @@ interface UseCase {
   examples?: ChatExample[];
 }
 
+interface OnPremSolution {
+  title: string;
+  idealFor: string;
+  tech: string;
+  description: string;
+  flow: string[];
+}
+
 const title = "Angajeaza un Robot | Agentie de Inteligenta Artificiala";
 const description = "Implementam agenti AI care automatizeaza suportul clienti, precalifica lead-uri si genereaza documente automat. Solutii Microsoft Copilot si Google Gemini pentru companii din Romania.";
 const canonical = "https://angajeazaunrobot.ro/";
@@ -30,7 +38,7 @@ const useCases: UseCase[] = [
     idealFor: "Parcuri auto, inchirieri masini, Marketplace-uri mari",
     tech: "Microsoft Copilot, Google Gemini",
     integration: "WhatsApp",
-    description: "Agentul AI preia orice cerere prin WhatsApp si raspunde instant, 24/7, fara a tine clientul in asteptare. Escaleaza automat doar cazurile critice catre echipa umana.",
+    description: "Agentul AI rezolva automat pana la 80% din intrebarile repetitive — rezervari, retururi, informatii despre produse — direct pe WhatsApp, 24/7. Clientul primeste un raspuns in secunde, nu in ore. Cazurile complexe sunt escalate automat catre echipa umana, cu tot istoricul conversatiei.",
     examples: [
       {
         client: "Aveti disponibil un SUV pentru weekendul viitor in Bucuresti?",
@@ -44,10 +52,10 @@ const useCases: UseCase[] = [
   },
   {
     title: "Precalificare Lead-uri in Vanzari & Listari",
-    idealFor: "Dezvoltatori software, firme de constructii, Marketplace-uri",
+    idealFor: "Dezvoltatori software, Marketplace-uri",
     integration: "WhatsApp, Email, SharePoint, Telefon (Voce)",
     tech: "Microsoft Copilot, Google Gemini",
-    description: "Robotul preia cererea din orice sursa (omnichannel), interogheaza baza de date in timp real si califica clientul (buget, urgenta, locatie) inainte de a trimite datele curate catre echipa de vanzari in SharePoint."
+    description: "Niciun lead nu se mai pierde. Agentul preia cereri din WhatsApp, email, telefon sau formulare, identifica bugetul, urgenta si locatia si trimite automat o fisa completa si curata direct in SharePoint — gata pentru echipa de vanzari, fara nicio munca manuala."
   },
   {
     title: "Automatizare Departament de Marketing",
@@ -55,14 +63,41 @@ const useCases: UseCase[] = [
     focus: "Generare produse noi adaptate zonei de livrare",
     tech: "Microsoft Copilot",
     integration: "SharePoint, Email",
-    description: "Agentul AI analizeaza trendurile locale si stocurile, propunand descrieri de produse, imagini si strategii de pret personalizate pentru fiecare regiune, totul intr-un mediu colaborativ."
+    description: "Agentul AI analizeaza trendurile locale, stocurile disponibile si comportamentul de cumparare pentru fiecare regiune si genereaza automat descrieri de produse, recomandari de pret si continut de campanie personalizat — totul in SharePoint, gata de revizuit si publicat."
   },
   {
     title: "Automatizare Operatiuni Interne",
     idealFor: "Contabilitate, Avocatura, Notari, Servicii, Software Dev",
     integration: "SharePoint, Google Drive",
     tech: "Microsoft Copilot, Google Gemini",
-    description: "Generare automata de contracte, facturi si documente tehnice. Urmarirea automata a documentelor pe fluxul de semnaturi digitale si arhivarea lor inteligenta. Gata cu munca manuala de copy-paste."
+    description: "Agentul genereaza contracte, facturi si documente tehnice dintr-un template in cateva secunde, urmareste fiecare document pe fluxul de aprobare si semnaturi digitale si il arhiveaza automat la final. Zero copy-paste, zero documente ratacite."
+  }
+];
+
+const onPremSolutions: OnPremSolution[] = [
+  {
+    title: "Generator de Oferte din Documente si Imagini",
+    idealFor: "Firme de constructii, instalatori, furnizori de materiale",
+    tech: "Agent custom on-premises",
+    description: "Transforma orice dosar de proiect — fotografii, planuri, liste de materiale, devize — intr-o oferta profesionala in cateva minute, fara nicio introducere manuala de date.",
+    flow: [
+      "Incarci imaginile, planurile si listele de materiale intr-un folder dedicat.",
+      "Agentul analizeaza fiecare fisier si extrage cantitati, specificatii tehnice si preturi.",
+      "Sistemul iti prezinta datele extrase si te intreaba daca trebuie ceva corectat sau completat.",
+      "Oferta finala este generata automat in formatul agreat — gata de trimis clientului."
+    ]
+  },
+  {
+    title: "Generator de Documentatie Tehnica Multilingva",
+    idealFor: "Firme de constructii, producatori de echipamente",
+    tech: "Agent custom on-premises",
+    description: "Transforma specificatii tehnice brute, schite si manuale in documentatie structurata si profesionala, disponibila automat in mai multe limbi — fara traduceri manuale si fara pierderi de informatii.",
+    flow: [
+      "Incarci specificatiile tehnice, schitele si manualele intr-un folder.",
+      "Agentul extrage informatiile relevante si le structureaza dupa un template prestabilit.",
+      "Sistemul verifica datele cu operatorul si solicita completari acolo unde e nevoie.",
+      "Documentatia tehnica completa este livrata in mai multe limbi, gata de distribuit."
+    ]
   }
 ];
 ---
@@ -80,7 +115,7 @@ const useCases: UseCase[] = [
         <div class="hero-cta">
           <a class="button primary" href={`tel:${phone}`}>Suna si Cere un Demo</a>
           <a class="button secondary" href="#contact">Discuta cu noi</a>
-          <a class="button secondary" href="#use-case-uri">Vezi use case-uri</a>
+          <a class="button secondary" href="#use-case-uri">Vezi solutii</a>
         </div>
       </div>
     </section>
@@ -101,24 +136,67 @@ const useCases: UseCase[] = [
                 </div>
                 <p class="use-case-desc">{item.description}</p>
                 {item.examples && (
-                  <div class="chat-example">
-                    <p class="chat-label">Exemplu conversatie (WhatsApp):</p>
-                    <div class="chat-exchange">
-                      {item.examples.map((ex) => (
-                        <>
-                          <div class="chat-msg chat-client">
-                            <span class="chat-who">Client</span>
-                            {ex.client}
-                          </div>
-                          <div class="chat-msg chat-robot">
-                            <span class="chat-who">Robot AI</span>
-                            {ex.robot}
-                          </div>
-                        </>
-                      ))}
-                    </div>
-                  </div>
+                  <button type="button" class="chat-trigger" id="open-chat-demo">
+                    Vezi exemplu conversatie WhatsApp →
+                  </button>
                 )}
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <div class="modal-overlay" id="chat-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <div class="modal-box">
+        <div class="modal-header">
+          <p class="modal-title" id="modal-title">Exemplu conversatie — WhatsApp</p>
+          <button type="button" class="modal-close" id="close-chat-modal" aria-label="Inchide">✕</button>
+        </div>
+        <div class="chat-exchange">
+          <div class="chat-msg chat-client">
+            <span class="chat-who">Client</span>
+            Aveti disponibil un SUV pentru weekendul viitor in Bucuresti?
+          </div>
+          <div class="chat-msg chat-robot">
+            <span class="chat-who">Robot AI</span>
+            Buna! Verific imediat... Da, avem un Volvo XC60 disponibil. Pretul este de 80€/zi. Vreti sa il rezervam acum?
+          </div>
+          <div class="chat-msg chat-client">
+            <span class="chat-who">Client</span>
+            Cum pot returna un produs cumparat ieri?
+          </div>
+          <div class="chat-msg chat-robot">
+            <span class="chat-who">Robot AI</span>
+            Sigur! Aveti nevoie de numarul comenzii. Va pot genera acum link-ul pentru curier daca imi confirmati adresa.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <section id="solutii-custom" class="section" aria-labelledby="titlu-on-prem">
+      <div class="container">
+        <p class="eyebrow eyebrow-teal">On-Premises &amp; Custom</p>
+        <h2 id="titlu-on-prem">Automatizari AI — Solutii on prem/custom</h2>
+        <p class="lead">
+          Agenti AI construiti si rulati local, pe infrastructura ta. Datele nu parasesc niciodata reteaua companiei.
+        </p>
+        <div class="grid on-prem-grid">
+          {
+            onPremSolutions.map((item) => (
+              <article class="card card-onprem">
+                <h3>{item.title}</h3>
+                <div class="use-case-meta">
+                  <p><span class="k-label">Ideal pentru:</span> {item.idealFor}</p>
+                  <p><span class="k-label">Tehnologie:</span> {item.tech}</p>
+                </div>
+                <p class="use-case-desc">{item.description}</p>
+                <p class="flow-heading">Cum functioneaza:</p>
+                <ol class="flow-list">
+                  {item.flow.map((step) => (
+                    <li>{step}</li>
+                  ))}
+                </ol>
               </article>
             ))
           }
@@ -143,16 +221,16 @@ const useCases: UseCase[] = [
           </li>
           <li>
             Telefon:
-              <a href={`tel:${phone}`}>{phoneDisplay}</a>
+            <a href={`tel:${phone}`}>{phoneDisplay}</a>
           </li>
         </ul>
-          <div class="contact-cta">
-            <a class="button primary" href={`tel:${phone}`}>Suna si Cere un Demo</a>
-            <a class="button secondary" href={`mailto:${primaryEmail}`}>Scrie-ne un email</a>
-          </div>
-          <p class="contact-note">Raspundem in aceeasi zi lucratoare.</p>
+        <div class="contact-cta">
+          <a class="button primary" href={`tel:${phone}`}>Suna si Cere un Demo</a>
+          <a class="button secondary" href={`mailto:${primaryEmail}`}>Scrie-ne un email</a>
+        </div>
+        <p class="contact-note">Raspundem in aceeasi zi lucratoare.</p>
         <div class="copy-wrap">
-            <button type="button" class="copy-btn" id="copy-email" data-email={primaryEmail}>Copiaza email principal</button>
+          <button type="button" class="copy-btn" id="copy-email" data-email={primaryEmail}>Copiaza email principal</button>
           <span class="copy-status" id="copy-status" role="status" aria-live="polite"></span>
         </div>
       </div>
@@ -166,19 +244,19 @@ const useCases: UseCase[] = [
   </footer>
 
   <script is:inline>
+    // Copy email
     const copyButton = document.querySelector("#copy-email");
     const status = document.querySelector("#copy-status");
 
     if (copyButton && status) {
       copyButton.addEventListener("click", async () => {
         const email = copyButton.getAttribute("data-email") || "";
-
         try {
           await navigator.clipboard.writeText(email);
           status.textContent = "Copiat!";
           copyButton.textContent = "Copiat!";
-          } catch {
-            // Fallback pentru browsere mai restrictive.
+        } catch {
+          // Fallback pentru browsere mai restrictive.
           const tempInput = document.createElement("input");
           tempInput.value = email;
           document.body.appendChild(tempInput);
@@ -188,11 +266,33 @@ const useCases: UseCase[] = [
           status.textContent = "Copiat!";
           copyButton.textContent = "Copiat!";
         }
-
         window.setTimeout(() => {
           status.textContent = "";
           copyButton.textContent = "Copiaza email principal";
         }, 1800);
+      });
+    }
+
+    // Chat demo modal
+    const openBtn = document.querySelector("#open-chat-demo");
+    const closeBtn = document.querySelector("#close-chat-modal");
+    const modal = document.querySelector("#chat-modal");
+
+    if (openBtn && closeBtn && modal) {
+      openBtn.addEventListener("click", () => {
+        modal.classList.add("is-open");
+        closeBtn.focus();
+      });
+      closeBtn.addEventListener("click", () => {
+        modal.classList.remove("is-open");
+      });
+      modal.addEventListener("click", (e) => {
+        if (e.target === modal) modal.classList.remove("is-open");
+      });
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && modal.classList.contains("is-open")) {
+          modal.classList.remove("is-open");
+        }
       });
     }
   </script>

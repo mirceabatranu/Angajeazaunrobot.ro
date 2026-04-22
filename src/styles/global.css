@@ -147,19 +147,121 @@ h1 {
   margin: 0.4rem 0 0.6rem;
 }
 
-.chat-example {
-  margin-top: 0.9rem;
-  border-top: 1px solid var(--border);
-  padding-top: 0.7rem;
+.chat-trigger {
+  cursor: pointer;
+  border: 1px solid var(--accent-2);
+  background: transparent;
+  color: var(--accent-2);
+  font-weight: 600;
+  font-size: 0.85rem;
+  border-radius: 0.6rem;
+  padding: 0.4rem 0.75rem;
+  margin-top: 0.6rem;
+  line-height: 1.4;
 }
 
-.chat-label {
+.chat-trigger:hover {
+  background: #e8f5f0;
+}
+
+.modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: #1d1a1766;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  padding: 1rem;
+}
+
+.modal-overlay.is-open {
+  display: flex;
+}
+
+.modal-box {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 1.1rem;
+  padding: 1.5rem 1.6rem;
+  width: min(500px, 100%);
+  box-shadow: 0 20px 60px #2e241530;
+  max-height: 85vh;
+  overflow-y: auto;
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.1rem;
+}
+
+.modal-title {
   font-weight: 700;
-  color: var(--accent-2);
-  font-size: 0.8rem;
+  font-size: 0.82rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  margin: 0 0 0.5rem;
+  color: var(--accent-2);
+  margin: 0;
+}
+
+.modal-close {
+  cursor: pointer;
+  border: 1px solid var(--border);
+  background: #fff;
+  border-radius: 0.5rem;
+  width: 2rem;
+  height: 2rem;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+  color: var(--muted);
+  line-height: 1;
+}
+
+.modal-close:hover {
+  border-color: var(--ink);
+  color: var(--ink);
+}
+
+.eyebrow-teal {
+  background: #e8f5f0;
+  border-color: #1f6f5f30;
+  color: var(--accent-2);
+}
+
+.card-onprem {
+  border-top: 3px solid var(--accent-2);
+}
+
+.flow-heading {
+  font-weight: 700;
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--accent-2);
+  margin: 0.9rem 0 0.4rem;
+}
+
+.flow-list {
+  padding-left: 1.3rem;
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+.flow-list li {
+  margin: 0.45rem 0;
+  line-height: 1.55;
+}
+
+.on-prem-grid {
+  align-items: start;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
 }
 
 .chat-exchange {
