@@ -1,34 +1,68 @@
 ---
 import Layout from "../layouts/Layout.astro";
 
+interface ChatExample {
+  client: string;
+  robot: string;
+}
+
+interface UseCase {
+  title: string;
+  idealFor: string;
+  tech: string;
+  integration?: string;
+  focus?: string;
+  description: string;
+  examples?: ChatExample[];
+}
+
 const title = "Angajeaza un Robot | Agentie de Inteligenta Artificiala";
-const description = "Construim agenti AI care reduc costuri, cresc viteza de executie si aduc claritate operationala pentru companiile din Romania.";
+const description = "Implementam agenti AI care automatizeaza suportul clienti, precalifica lead-uri si genereaza documente automat. Solutii Microsoft Copilot si Google Gemini pentru companii din Romania.";
 const canonical = "https://angajeazaunrobot.ro/";
 const primaryEmail = "mirceaipopescu@gmail.com";
 const secondaryEmail = "salut@angajeazaunrobot.ro";
 const phone = "+40744681989";
 const phoneDisplay = "+40 744 681 989";
 
-const useCases = [
+const useCases: UseCase[] = [
   {
     title: "Automatizare Suport Clienti",
-    problem: "Echipele raspund lent la volume mari de intrebari repetitive, iar satisfactia clientilor scade.",
-    solution: "Agenti AI omnichannel preiau tichete, raspund instant in romana si escaleaza doar cazurile critice."
+    idealFor: "Parcuri auto, inchirieri masini, Marketplace-uri mari",
+    tech: "Microsoft Copilot, Google Gemini",
+    integration: "WhatsApp",
+    description: "Agentul AI preia orice cerere prin WhatsApp si raspunde instant, 24/7, fara a tine clientul in asteptare. Escaleaza automat doar cazurile critice catre echipa umana.",
+    examples: [
+      {
+        client: "Aveti disponibil un SUV pentru weekendul viitor in Bucuresti?",
+        robot: "Buna! Verific imediat... Da, avem un Volvo XC60 disponibil. Pretul este de 80€/zi. Vreti sa il rezervam acum?"
+      },
+      {
+        client: "Cum pot returna un produs cumparat ieri?",
+        robot: "Sigur! Aveti nevoie de numarul comenzii. Va pot genera acum link-ul pentru curier daca imi confirmati adresa."
+      }
+    ]
   },
   {
-    title: "Precalificare Lead-uri in Vanzari",
-    problem: "Lead-urile se pierd intre formulare, emailuri si apeluri, iar echipa comerciala consuma timp pe prospecti nepotriviti.",
-    solution: "Agenti conversationali califica intentia, colecteaza datele relevante si trimit lead-uri curate direct in pipeline."
+    title: "Precalificare Lead-uri in Vanzari & Listari",
+    idealFor: "Dezvoltatori software, firme de constructii, Marketplace-uri",
+    integration: "WhatsApp, Email, SharePoint, Telefon (Voce)",
+    tech: "Microsoft Copilot, Google Gemini",
+    description: "Robotul preia cererea din orice sursa (omnichannel), interogheaza baza de date in timp real si califica clientul (buget, urgenta, locatie) inainte de a trimite datele curate catre echipa de vanzari in SharePoint."
+  },
+  {
+    title: "Automatizare Departament de Marketing",
+    idealFor: "Multinationale",
+    focus: "Generare produse noi adaptate zonei de livrare",
+    tech: "Microsoft Copilot",
+    integration: "SharePoint, Email",
+    description: "Agentul AI analizeaza trendurile locale si stocurile, propunand descrieri de produse, imagini si strategii de pret personalizate pentru fiecare regiune, totul intr-un mediu colaborativ."
   },
   {
     title: "Automatizare Operatiuni Interne",
-    problem: "Procesele manuale dintre departamente genereaza blocaje, erori si costuri ascunse.",
-    solution: "Fluxuri AI conectate la instrumentele interne executa task-uri repetitive cu trasabilitate completa."
-  },
-  {
-    title: "Asistent AI pentru Management",
-    problem: "Deciziile sunt intarziate din lipsa unei sinteze rapide a datelor operationale.",
-    solution: "Un asistent AI transforma date disparate in rapoarte concise, recomandari si alerte proactive."
+    idealFor: "Contabilitate, Avocatura, Notari, Servicii, Software Dev",
+    integration: "SharePoint, Google Drive",
+    tech: "Microsoft Copilot, Google Gemini",
+    description: "Generare automata de contracte, facturi si documente tehnice. Urmarirea automata a documentelor pe fluxul de semnaturi digitale si arhivarea lor inteligenta. Gata cu munca manuala de copy-paste."
   }
 ];
 ---
@@ -44,7 +78,8 @@ const useCases = [
           automatizeaza procese operationale si lucreaza 24/7, cu cost predictibil si control uman.
         </p>
         <div class="hero-cta">
-          <a class="button primary" href="#contact">Discuta cu noi</a>
+          <a class="button primary" href={`tel:${phone}`}>Suna si Cere un Demo</a>
+          <a class="button secondary" href="#contact">Discuta cu noi</a>
           <a class="button secondary" href="#use-case-uri">Vezi use case-uri</a>
         </div>
       </div>
@@ -52,17 +87,38 @@ const useCases = [
 
     <section id="use-case-uri" class="section" aria-labelledby="titlu-use-case">
       <div class="container">
-        <h2 id="titlu-use-case">Use case-uri AI gata de implementat</h2>
-        <div class="grid">
+        <h2 id="titlu-use-case">Automatizari AI — Solutii gata de implementat</h2>
+        <div class="grid use-cases-grid">
           {
             useCases.map((item) => (
               <article class="card">
                 <h3>{item.title}</h3>
-                <p><span class="k-label">Problema:</span> {item.problem}</p>
-                <p><span class="k-label">Solutie AI:</span> {item.solution}</p>
-                <p>
-                  <a href="#" rel="nofollow">Vezi schema tehnica (placeholder)</a>
-                </p>
+                <div class="use-case-meta">
+                  <p><span class="k-label">Ideal pentru:</span> {item.idealFor}</p>
+                  <p><span class="k-label">Tehnologie:</span> {item.tech}</p>
+                  {item.integration && <p><span class="k-label">Integrare:</span> {item.integration}</p>}
+                  {item.focus && <p><span class="k-label">Focus:</span> {item.focus}</p>}
+                </div>
+                <p class="use-case-desc">{item.description}</p>
+                {item.examples && (
+                  <div class="chat-example">
+                    <p class="chat-label">Exemplu conversatie (WhatsApp):</p>
+                    <div class="chat-exchange">
+                      {item.examples.map((ex) => (
+                        <>
+                          <div class="chat-msg chat-client">
+                            <span class="chat-who">Client</span>
+                            {ex.client}
+                          </div>
+                          <div class="chat-msg chat-robot">
+                            <span class="chat-who">Robot AI</span>
+                            {ex.robot}
+                          </div>
+                        </>
+                      ))}
+                    </div>
+                  </div>
+                )}
               </article>
             ))
           }
@@ -74,7 +130,7 @@ const useCases = [
       <div class="container contact">
         <h2 id="titlu-contact">Contact direct</h2>
         <p class="lead">
-          Fara formulare si fara frictiuni. Scrie-ne sau suna-ne direct pentru o discutie despre primul tau agent AI.
+          Fara formulare si fara frictiuni. Suna-ne sau scrie-ne direct pentru o discutie despre primul tau agent AI.
         </p>
         <ul class="contact-list">
           <li>
@@ -91,7 +147,8 @@ const useCases = [
           </li>
         </ul>
           <div class="contact-cta">
-            <a class="button primary" href={`mailto:${primaryEmail}`}>Scrie-ne un email</a>
+            <a class="button primary" href={`tel:${phone}`}>Suna si Cere un Demo</a>
+            <a class="button secondary" href={`mailto:${primaryEmail}`}>Scrie-ne un email</a>
           </div>
           <p class="contact-note">Raspundem in aceeasi zi lucratoare.</p>
         <div class="copy-wrap">
