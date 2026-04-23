@@ -20,8 +20,10 @@ interface OnPremSolution {
   title: string;
   idealFor: string;
   tech: string;
+  integration?: string;
+  focus?: string;
   description: string;
-  flow: string[];
+  flow?: string[];
 }
 
 const title = "Angajeaza un Robot | Agentie de Inteligenta Artificiala";
@@ -58,14 +60,6 @@ const useCases: UseCase[] = [
     description: "Niciun lead nu se mai pierde. Agentul preia cereri din WhatsApp, email, telefon sau formulare, identifica bugetul, urgenta si locatia si trimite automat o fisa completa si curata direct in SharePoint — gata pentru echipa de vanzari, fara nicio munca manuala."
   },
   {
-    title: "Automatizare Departament de Marketing",
-    idealFor: "Multinationale",
-    focus: "Generare produse noi adaptate zonei de livrare",
-    tech: "Microsoft Copilot",
-    integration: "SharePoint, Email",
-    description: "Agentul AI analizeaza trendurile locale, stocurile disponibile si comportamentul de cumparare pentru fiecare regiune si genereaza automat descrieri de produse, recomandari de pret si continut de campanie personalizat — totul in SharePoint, gata de revizuit si publicat."
-  },
-  {
     title: "Automatizare Operatiuni Interne",
     idealFor: "Contabilitate, Avocatura, Notari, Servicii, Software Dev",
     integration: "SharePoint, Google Drive",
@@ -75,6 +69,14 @@ const useCases: UseCase[] = [
 ];
 
 const onPremSolutions: OnPremSolution[] = [
+  {
+    title: "Automatizare Departament de Marketing",
+    idealFor: "Multinationale",
+    focus: "Generare produse noi adaptate zonei de livrare",
+    tech: "Microsoft Copilot",
+    integration: "SharePoint, Email",
+    description: "Agentul AI analizeaza trendurile locale, stocurile disponibile si comportamentul de cumparare pentru fiecare regiune si genereaza automat descrieri de produse, recomandari de pret si continut de campanie personalizat — totul in SharePoint, gata de revizuit si publicat."
+  },
   {
     title: "Generator de Oferte din Documente si Imagini",
     idealFor: "Firme de constructii, instalatori, furnizori de materiale",
@@ -189,14 +191,20 @@ const onPremSolutions: OnPremSolution[] = [
                 <div class="use-case-meta">
                   <p><span class="k-label">Ideal pentru:</span> {item.idealFor}</p>
                   <p><span class="k-label">Tehnologie:</span> {item.tech}</p>
+                  {item.integration && <p><span class="k-label">Integrare:</span> {item.integration}</p>}
+                  {item.focus && <p><span class="k-label">Focus:</span> {item.focus}</p>}
                 </div>
                 <p class="use-case-desc">{item.description}</p>
-                <p class="flow-heading">Cum functioneaza:</p>
-                <ol class="flow-list">
-                  {item.flow.map((step) => (
-                    <li>{step}</li>
-                  ))}
-                </ol>
+                {item.flow && (
+                  <>
+                    <p class="flow-heading">Cum functioneaza:</p>
+                    <ol class="flow-list">
+                      {item.flow.map((step) => (
+                        <li>{step}</li>
+                      ))}
+                    </ol>
+                  </>
+                )}
               </article>
             ))
           }
