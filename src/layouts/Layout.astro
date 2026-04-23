@@ -8,8 +8,8 @@ interface Props {
 }
 
 const {
-  title = "Angajeaza un Robot | Agentie de Inteligenta Artificiala",
-  description = "Implementam agenti AI care automatizeaza suportul clienti, precalifica lead-uri si genereaza documente automat. Solutii Microsoft Copilot si Google Gemini pentru companii din Romania.",
+  title = "Automatizare AI: Suport Clienti, Lead-uri, Documente | Angajeaza un Robot",
+  description = "Redu costurile cu agenti AI 24/7: suport WhatsApp, calificare lead-uri, contracte si oferte automate. Solutii Microsoft Copilot si Gemini in Romania.",
   canonical = "https://angajeazaunrobot.ro/"
 } = Astro.props;
 
@@ -54,6 +54,74 @@ const organizationSchema = {
     }
   ]
 };
+
+const servicesSchema = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  name: "Solutii AI Angajeaza un Robot",
+  itemListElement: [
+    {
+      "@type": "ListItem",
+      position: 1,
+      item: {
+        "@type": "Service",
+        name: "Automatizare Suport Clienti WhatsApp",
+        description: "Redu costurile cu un agent AI pe WhatsApp disponibil 24/7. Rezolva 80% din intrebarile repetitive instant si imbunatateste experienta clientilor tai.",
+        provider: { "@type": "Organization", name: "Angajeaza un Robot", url: "https://angajeazaunrobot.ro" }
+      }
+    },
+    {
+      "@type": "ListItem",
+      position: 2,
+      item: {
+        "@type": "Service",
+        name: "Calificare Lead-uri AI si Vanzari Automate",
+        description: "Nu mai pierde niciun lead. Agentul AI preia cererile din WhatsApp si Email, identifica bugetul si trimite datele direct in SharePoint.",
+        provider: { "@type": "Organization", name: "Angajeaza un Robot", url: "https://angajeazaunrobot.ro" }
+      }
+    },
+    {
+      "@type": "ListItem",
+      position: 3,
+      item: {
+        "@type": "Service",
+        name: "Automatizare Documente si Operatiuni Interne",
+        description: "Generare automata de contracte si facturi. Elimina munca manuala si erorile cu roboti care gestioneaza fluxul de semnaturi si arhivarea.",
+        provider: { "@type": "Organization", name: "Angajeaza un Robot", url: "https://angajeazaunrobot.ro" }
+      }
+    },
+    {
+      "@type": "ListItem",
+      position: 4,
+      item: {
+        "@type": "Service",
+        name: "Marketing AI pentru Multinationale",
+        description: "Automatizeaza crearea de produse si campanii adaptate local. Agentul AI analizeaza stocurile si trendurile pentru a genera oferte personalizate.",
+        provider: { "@type": "Organization", name: "Angajeaza un Robot", url: "https://angajeazaunrobot.ro" }
+      }
+    },
+    {
+      "@type": "ListItem",
+      position: 5,
+      item: {
+        "@type": "Service",
+        name: "Generator Oferte din Imagini si Planuri",
+        description: "Transforma schitele si listele de materiale in oferte profesionale in cateva minute. Fara introducere manuala de date, doar incarcare si procesare.",
+        provider: { "@type": "Organization", name: "Angajeaza un Robot", url: "https://angajeazaunrobot.ro" }
+      }
+    },
+    {
+      "@type": "ListItem",
+      position: 6,
+      item: {
+        "@type": "Service",
+        name: "Documentatie Tehnica Multilingva",
+        description: "Transforma specificatiile brute in manuale structurate si traduse automat. Economiseste timp si costuri cu traduceri tehnice precise prin AI.",
+        provider: { "@type": "Organization", name: "Angajeaza un Robot", url: "https://angajeazaunrobot.ro" }
+      }
+    }
+  ]
+};
 ---
 
 <!doctype html>
@@ -77,6 +145,7 @@ const organizationSchema = {
     <meta name="twitter:description" content={description} />
 
     <script type="application/ld+json" set:html={JSON.stringify(organizationSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(servicesSchema)} />
   </head>
   <body>
     <slot />
